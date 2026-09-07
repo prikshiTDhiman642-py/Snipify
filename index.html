@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AuraAudio — Minimal Glassmorphic MP3 Extractor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <!-- Top Glass Navigation -->
+  <nav class="top-nav">
+    <div class="brand">AURA<span>AUDIO</span></div>
+    <div class="user-tier-container">
+      <div id="tierBadge" class="tier-pill tier-free">Free Plan</div>
+      <button id="openUpgradeBtn" class="btn-upgrade-pill">⚡ Upgrade to Pro</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="hero">
+      <div class="quota-pill" id="quotaDisplay">
+        <span class="dot"></span> <span id="quotaText">Loading quota...</span>
+      </div>
+      <h1>Extract Studio <span class="gradient-text">MP3 Audio</span></h1>
+      <p class="subtitle">Paste Instagram Reels or video links. Select your desired bitrate and download instantly.</p>
+    </header>
+
+    <!-- Main Glassmorphism Card -->
+    <div class="glass-card main-card">
+      <form id="extractForm" class="input-form">
+        
+        <!-- URL Input Field -->
+        <div class="input-wrapper">
+          <svg class="link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+          </svg>
+          <input 
+            type="url" 
+            id="urlInput" 
+            placeholder="https://www.instagram.com/reel/..." 
+            required 
+            autocomplete="off"
+          />
+          <button type="button" id="pasteBtn" class="btn-paste" title="Paste from clipboard">Paste</button>
+        </div>
+
+        <!-- Audio Bitrate Selector -->
+        <div class="bitrate-section">
+          <label class="section-label">Audio Quality / Bitrate</label>
+          <div class="bitrate-grid">
+            <button type="button" class="bitrate-chip" data-bitrate="128">
+              <span class="chip-val">128 kbps</span>
+              <span class="chip-sub">Compact</span>
+            </button>
+            <button type="button" class="bitrate-chip active" data-bitrate="192">
+              <span class="chip-val">192 kbps</span>
+              <span class="chip-sub">Standard</span>
+            </button>
+            <button type="button" class="bitrate-chip pro-chip" data-bitrate="256">
+              <span class="chip-val">256 kbps <span class="badge-pro">PRO</span></span>
+              <span class="chip-sub">High-Res</span>
+            </button>
+            <button type="button" class="bitrate-chip pro-chip" data-bitrate="320">
+              <span class="chip-val">320 kbps <span class="badge-pro">PRO</span></span>
+              <span class="chip-sub">Studio Master</span>
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-primary">
+          <span class="btn-text">Analyze Link</span>
+          <div class="spinner" id="spinner"></div>
+        </button>
+      </form>
+
+      <!-- Status notification -->
+      <div id="statusMessage" class="status-box hidden"></div>
+
+      <!-- Preview & Download Card -->
+      <div id="resultCard" class="result-box hidden">
+        <div class="meta-row">
+          <img id="mediaThumbnail" src="" alt="Thumbnail" class="thumbnail" />
+          <div class="meta-info">
+            <h4 id="mediaTitle">Audio Track</h4>
+            <div class="meta-tags">
+              <span id="mediaDuration" class="tag">00:00</span>
+              <span id="mediaUploader" class="tag">Creator</span>
+              <span id="selectedQualityTag" class="tag format-tag">192 kbps MP3</span>
+            </div>
+          </div>
+        </div>
+
+        <button id="downloadBtn" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="icon-sm">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+          Download MP3
+        </button>
+      </div>
+    </div>
+  </main>
+
+  <!-- Glassmorphic Upgrade Modal -->
+  <div id="upgradeModal" class="modal-overlay hidden">
+    <div class="glass-modal">
+      <div class="modal-header">
+        <h3>Upgrade to <span class="gradient-text">AuraAudio Pro</span></h3>
+        <button id="closeModalBtn" class="close-btn">&times;</button>
+      </div>
+
+      <div class="plan-comparison">
+        <div class="plan-feature-item">
+          <span>⚡ Daily Downloads</span>
+          <strong>50 / day <span class="subtext">(vs 3 Free)</span></strong>
+        </div>
+        <div class="plan-feature-item">
+          <span>🎧 High-Res Bitrates</span>
+          <strong>256k & 320 kbps HD</strong>
+        </div>
+        <div class="plan-feature-item">
+          <span>🚀 Server Queue</span>
+          <strong>Priority Fast-Track</strong>
+        </div>
+      </div>
+
+      <div class="license-input-box">
+        <input type="text" id="licenseKeyInput" placeholder="Enter License Key (e.g. PRO2026)" />
+        <button id="activateLicenseBtn" class="btn-primary btn-modal">Activate Pro</button>
+      </div>
+      <p class="demo-hint">💡 Demo Key: <code>PRO2026</code></p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
