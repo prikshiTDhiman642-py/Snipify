@@ -16,7 +16,7 @@ A modern, minimalist web application built with a sleek **dark glassmorphic UI**
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** HTML5, CSS3 (Glassmorphism), Vanilla JavaScript
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript
 - **Backend:** Python, FastAPI, Uvicorn, Pydantic
 - **Audio Extraction Engine:** `yt-dlp` & `FFmpeg`
 
