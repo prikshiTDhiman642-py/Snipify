@@ -5,8 +5,6 @@ A modern, minimalist web application built with a sleek **dark glassmorphic UI**
 ---
 
 ## ✨ Features
-
-- 💎 **Minimalist Dark Glassmorphism:** Ambient glowing background with frosted glass cards.
 - 🎛️ **Audio Bitrate Selector:** Switch between `128 kbps`, `192 kbps`, `256 kbps`, and `320 kbps (Studio Master)`.
 - ⚡ **Freemium Quota System:**
   - **Free Tier:** 3 conversions / 24 hrs (`128k` & `192k`).
