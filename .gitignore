@@ -1,36 +1,20 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# local env files
-.env*.local
+# Byte-compiled / optimized / virtual environment
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
 .env
 
-# vercel
-.vercel
+# Temporary conversion files
+*.mp3
+*.mp4
+*.webm
+*.part
+*.ytdl
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# Operating System & Editor Files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
